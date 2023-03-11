@@ -1,0 +1,7 @@
+{
+  "name": "Calcu-Proyecto-UX",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react"
+}
