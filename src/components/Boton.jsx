@@ -2,7 +2,7 @@ import './Boton.css';
 function Boton(props) {
     function esOperador() {
         const valor = props.children;
-        return isNaN(valor) && (valor !== '.') && (valor !== '=');
+        return (valor === '=');
     }
     return (
         <div className={`boton ${esOperador() ? 'operador': ''}`}

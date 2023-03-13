@@ -30,13 +30,59 @@ import './theme/variables.css';
 setupIonicReact();
 
 const App: React.FC = () => {
-  const [input, setInput] = useState('22318.60');
+  const [input, setInput] = useState('0');
+
   const agregarInput = (val:string) => {
-    setInput(input + val);
+     if(val=="⌫"){
+      setInput(input.slice(0,-1));
+    }else if(val=="1/x"){
+        setInput(evaluate("1/"+input));
+    }else if(val=="+/-"){
+      setInput(evaluate(input+"*(-1)"));
+      console.log("Estoy en el cambio de signo: "+input);
+    }else if(val=="C"){
+      setInput('');
+      setInput(evaluate(input+"*"+input));
+    }else if(val=="2sqrt(x)"){
+      
+      if(input.includes("-")){
+        val=input.replace("-","+");
+        setInput(evaluate("sqrt("+val+")"));
+        
+        console.log("hay signo -");
+      }if(!input.includes("-")){
+        setInput(evaluate("sqrt("+input+")"));
+        console.log("No hay signo -");
+      }
+        
+    }else{
+      setInput(input + val);
+    }
+    
   }
-  const calcularResultado = () => {
-    if(input)
-    setInput(evaluate(input));
+  const calcularResultado = (val:string) => {
+    if(input){
+      var val = input;
+      console.log(val);
+      console.log("Soy input: "+input);
+        if(input.includes("X")){
+         
+          val=val.replace("X","*")
+          console.log("Debería cambiar: "+val);
+          setInput(val);
+          
+        }
+        if(input.includes("÷")){
+          val=val.replace("÷","/")
+          console.log("Debería cambiar: "+val);
+          setInput(val);
+        }
+        
+      
+      
+      setInput(evaluate(val));
+      
+    }
   }
 
   return (
@@ -49,39 +95,40 @@ const App: React.FC = () => {
               <div className='fila'>
               <Boton manejarClic={agregarInput}>%</Boton>
               <Boton manejarClic={agregarInput}>CE</Boton>
-              <BotonClear manejarClear={() => setInput('')}>C</BotonClear>
-              <Boton manejarClic={agregarInput}>x</Boton>
+              <Boton manejarClic={agregarInput}>C</Boton>
+              <Boton manejarClic={agregarInput}>⌫</Boton>
             </div>
             <div className='fila'>
               <Boton manejarClic={agregarInput}>1/x</Boton>
-              <Boton manejarClic={agregarInput}>x2</Boton>
-              <Boton manejarClic={agregarInput}>2/-x</Boton>
-              <Boton manejarClic={agregarInput}>/</Boton>
+              <Boton manejarClic={agregarInput}>x^2</Boton>
+              <Boton manejarClic={agregarInput}>2sqrt(x)</Boton>
+              <Boton manejarClic={agregarInput}>÷</Boton>
             </div>
             <div className='fila'>
               <Boton manejarClic={agregarInput}>7</Boton>
               <Boton manejarClic={agregarInput}>8</Boton>
               <Boton manejarClic={agregarInput}>9</Boton>
-              <Boton manejarClic={agregarInput}>*</Boton>
+              <Boton manejarClic={agregarInput}>X</Boton>
             </div>
             <div className='fila'>
-              <Boton manejarClic={calcularResultado}>=</Boton>
-              <Boton manejarClic={agregarInput}>0</Boton>
-              <Boton manejarClic={agregarInput}>.</Boton>
-              <Boton manejarClic={agregarInput}>/</Boton>
+              <Boton manejarClic={agregarInput}>4</Boton>
+              <Boton manejarClic={agregarInput}>5</Boton>
+              <Boton manejarClic={agregarInput}>6</Boton>
+              <Boton manejarClic={agregarInput}>-</Boton>
             </div>
             <div className='fila'>
-              <Boton manejarClic={calcularResultado}>=</Boton>
-              <Boton manejarClic={agregarInput}>0</Boton>
-              <Boton manejarClic={agregarInput}>.</Boton>
-              <Boton manejarClic={agregarInput}>/</Boton>
+              <Boton manejarClic={agregarInput}>1</Boton>
+              <Boton manejarClic={agregarInput}>2</Boton>
+              <Boton manejarClic={agregarInput}>3</Boton>
+              <Boton manejarClic={agregarInput}>+</Boton>
             </div>
             <div className='fila'>
-              <Boton manejarClic={calcularResultado}>=</Boton>
+              <Boton manejarClic={agregarInput}>+/-</Boton>
               <Boton manejarClic={agregarInput}>0</Boton>
               <Boton manejarClic={agregarInput}>.</Boton>
-              <BotonClear manejarClear={() => setInput('')}>=</BotonClear>
+              <Boton manejarClic={calcularResultado}>=</Boton>
             </div>
+            
           </div>
         </div>
       </IonContent>      
