@@ -49,7 +49,7 @@ const App: React.FC = () => {
               <div className='fila'>
               <Boton manejarClic={agregarInput}>%</Boton>
               <Boton manejarClic={agregarInput}>CE</Boton>
-              <Boton manejarClic={agregarInput}>C</Boton>
+              <BotonClear manejarClear={() => setInput('')}>C</BotonClear>
               <Boton manejarClic={agregarInput}>x</Boton>
             </div>
             <div className='fila'>
@@ -80,12 +80,7 @@ const App: React.FC = () => {
               <Boton manejarClic={calcularResultado}>=</Boton>
               <Boton manejarClic={agregarInput}>0</Boton>
               <Boton manejarClic={agregarInput}>.</Boton>
-              <Boton manejarClic={agregarInput}>/</Boton>
-            </div>
-            <div className='fila'>
-              <BotonClear manejarClear={() => setInput('')}>
-                Limpiar
-              </BotonClear>
+              <BotonClear manejarClear={() => setInput('')}>=</BotonClear>
             </div>
           </div>
         </div>
