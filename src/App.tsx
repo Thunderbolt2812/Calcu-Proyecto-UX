@@ -33,7 +33,7 @@ const App: React.FC = () => {
   const [input, setInput] = useState('0');
 
   const agregarInput = (val:string) => {
-     if(val=="Delete"){
+     if(val=="⌫"){
       setInput(input.slice(0,-1));
     }else if(val=="1/x"){
         setInput(evaluate("1/"+input));
@@ -42,14 +42,19 @@ const App: React.FC = () => {
       console.log("Estoy en el cambio de signo: "+input);
     }else if(val=="C"){
       setInput('');
-    }else if(val=="CE"){
-      setInput('');
-    }else if(val=="x^2"){
       setInput(evaluate(input+"*"+input));
     }else if(val=="2sqrt(x)"){
-      var ent1=input.toString();
-      var ent=parseInt(ent1);
-      setInput(evaluate("sqrt("+input+")"));
+      
+      if(input.includes("-")){
+        val=input.replace("-","+");
+        setInput(evaluate("sqrt("+val+")"));
+        
+        console.log("hay signo -");
+      }if(!input.includes("-")){
+        setInput(evaluate("sqrt("+input+")"));
+        console.log("No hay signo -");
+      }
+        
     }else{
       setInput(input + val);
     }
@@ -91,7 +96,7 @@ const App: React.FC = () => {
               <Boton manejarClic={agregarInput}>%</Boton>
               <Boton manejarClic={agregarInput}>CE</Boton>
               <Boton manejarClic={agregarInput}>C</Boton>
-              <Boton manejarClic={agregarInput}>Delete</Boton>
+              <Boton manejarClic={agregarInput}>⌫</Boton>
             </div>
             <div className='fila'>
               <Boton manejarClic={agregarInput}>1/x</Boton>
