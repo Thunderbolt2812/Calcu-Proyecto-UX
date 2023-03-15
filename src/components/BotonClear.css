@@ -1,13 +1,12 @@
 .boton-clear{
-    height: 83px;
+    height: 80px;
     display: flex;
     flex: 1 1;
     justify-content: center;
     align-items: center;
-    font-weight: bold;
-    background-color: #333;
+    background-color: #131313;
     color: white;
-    border: 0.5px solid #333;
+    border: 0.5px solid #1F1F1F;
     cursor: pointer;
     user-select: none;
 }

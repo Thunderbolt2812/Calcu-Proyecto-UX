@@ -1,25 +1,37 @@
 .boton {
-    height: 83px;
+    height: 80px;
     display: flex;
     flex: 1 1;
     justify-content: center;
     align-items: center;
-    font-weight: bold;
-    background-color: rgb(24, 24, 24);
+    background-color: #060606;
     color: white;
-    border: 0.5px solid #333;
+    border: 0.5px solid #1F1F1F;
     cursor: pointer;
     user-select: none;
 }
 .operador{
-    background-color:rgb(14, 219, 219);
+    background-color:#131313;
 }
 .igual{
-    background-color:darkblue;
+    background-color:#134369;
 }
 .boton:hover {
     background-color: #444444;
 }
-.operador:hover {
-    background-color: #f57945 !important;
+.botonMem {
+    height: 40px;
+    display: flex;
+    flex: 1 1;
+    justify-content: center;
+    align-items: center;
+    background-color: #1F1F1F;
+    color: white;
+    border: 0.5px solid #1F1F1F;
+    cursor: pointer;
+    user-select: none;
+    font-size: 0.8rem;
+}
+.botonMem:hover {
+    background-color: #444444;
 }
