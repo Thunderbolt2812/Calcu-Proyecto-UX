@@ -5,16 +5,17 @@
   height: 100vh;
   flex-direction: column;
   background-color: #413f42;
-  font-family: "Share Tech Mono", "Segoe UI", Tahoma, Geneva, Verdana,;
+  font-family: "Share Tech Mono", "Segoe UI", Tahoma, Geneva, Verdana, ;
   overflow: hidden;
 }
+
 .calculadora {
   width: 400px;
-  height: 600px;
+  height: 650px;
   background-color: #333;
   box-shadow: 0 0 24px 10px rgba(0, 0, 0, 0.3);
-  height: 600px;
 }
+
 .fila {
   display: flex;
   align-items: center;
@@ -22,5 +23,32 @@
   background-color: #1F1F1F;
   color: #fff;
   border: 0.01px solid #1F1F1F;
-  font-size: 1.2rem;  
+  font-size: 1.2rem;
+}
+
+ion-modal#historial {
+  width: 400px;
+  height: 665px;
+  position: absolute;
+  top: 51%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+}
+
+ion-modal#historial::part(backdrop) {
+  background: rgba(209, 213, 219);
+  opacity: 1;
+}
+
+ion-modal#historial ion-toolbar {
+  background: #1F1F1F;
+  color: white;
+  ;
+}
+
+ion-modal#historial ion-content {
+  background: #1F1F1F;
+  color: white;
+  ;
 }

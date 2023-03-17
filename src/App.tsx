@@ -1,10 +1,9 @@
 
-import { IonApp, setupIonicReact, IonContent, IonPage } from '@ionic/react';
-
+import { IonApp, setupIonicReact, IonContent, IonPage, IonHeader, IonToolbar, IonButtons, IonTitle, IonButton, IonModal, IonLabel, IonItem, IonList, IonIcon } from '@ionic/react';
 import './App.css';
 import Pantalla from './components/Pantalla';
 import { Boton, BotonIgual, BotonMem } from './components/Boton';
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { evaluate } from 'mathjs';
 
 /* Core CSS required for Ionic components to work properly */
@@ -90,16 +89,52 @@ const App: React.FC = () => {
     const result = numero ** 2;
     setInput(`${result}`);
   }
+  const modal = useRef<HTMLIonModalElement>(null);
+  const page = useRef(null);
+
+  const [presentingElement, setPresentingElement] = useState<HTMLElement | null>(null);
+
+  useEffect(() => {
+    setPresentingElement(page.current);
+  }, []);
+
+  function dismiss() {
+    modal.current?.dismiss();
+  }
+
 
   return (
     <IonApp>
       <IonPage>
-        <IonContent fullscreen>
+        <IonContent fullscreen >
+          <IonModal id='historial' ref={modal} trigger="open-modal" initialBreakpoint={0.75} presentingElement={presentingElement!}>
+            <IonHeader >
+              <IonToolbar color="#1f1f1">
+                <IonTitle >Historial</IonTitle>
+                <IonButtons slot="end">
+                  <IonButton onClick={() => dismiss()}>Cerrar</IonButton>
+                </IonButtons>
+              </IonToolbar>
+            </IonHeader>
+            <IonContent color="#1f1f1">
+              <IonList>
+                <IonItem>
+                  <IonLabel>
+                    <h2>Connor Smith</h2>
+                    <p>Sales Rep</p>
+                  </IonLabel>
+                </IonItem>
+              </IonList>
+            </IonContent>
+          </IonModal>
           <div className="App">
             <div className="calculadora">
               <div className='fila'>
-                <BotonMem manejarClic={agregarInput}>---</BotonMem>
                 <BotonMem manejarClic={agregarInput}>Historial</BotonMem>
+                
+                <IonButton id="open-modal" expand="block">
+                  <IonIcon name="time" ></IonIcon>
+                </IonButton>
               </div>
               <Pantalla input={input} />
               <div className='fila'>
