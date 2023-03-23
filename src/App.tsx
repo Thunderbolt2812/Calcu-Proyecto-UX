@@ -30,17 +30,11 @@ setupIonicReact();
 
 const App: React.FC = () => {
   const [input, setInput] = useState('0');
-  const [history, setHistory] = useState([]);
-  type HistorialProps = {
-    history: any;
-    setHistory: any;
-}
-
   const agregarInput = (val: string) => {
     setInput('');
     if (val === "⌫") {
       setInput(input.slice(0, -1));
-    } else if (val === "1/x") {
+    } else if (val === "1/𝒙") {
       setInput(evaluate("1/" + input));
     } else if (val === "+/-") {
       setInput(evaluate(input + "*(-1)"));
@@ -48,7 +42,10 @@ const App: React.FC = () => {
     } else if (val === "C") {
       setInput('');
       setInput(evaluate(input + "*" + input));
-    } else if (val === "2sqrt(x)") {
+    } else if (val === "CE") {
+      setInput('0');
+      
+    }  else if (val === "²√𝒙") {
 
       if (input.includes("-")) {
         val = input.replace("-", "+");
@@ -95,6 +92,7 @@ const App: React.FC = () => {
     const result = numero ** 2;
     setInput(`${result}`);
   }
+
   const modal = useRef<HTMLIonModalElement>(null);
   const page = useRef(null);
 
