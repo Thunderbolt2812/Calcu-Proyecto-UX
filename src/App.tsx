@@ -3,7 +3,7 @@ import { IonApp, setupIonicReact, IonContent, IonPage, IonHeader, IonToolbar, Io
 import './App.css';
 import Pantalla from './components/Pantalla';
 import { Boton, BotonIgual, BotonMem } from './components/Boton';
-import { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { evaluate } from 'mathjs';
 
 /* Core CSS required for Ionic components to work properly */
@@ -30,6 +30,12 @@ setupIonicReact();
 
 const App: React.FC = () => {
   const [input, setInput] = useState('0');
+  const [history, setHistory] = useState([]);
+  type HistorialProps = {
+    history: any;
+    setHistory: any;
+}
+
   const agregarInput = (val: string) => {
     setInput('');
     if (val === "⌫") {
@@ -120,8 +126,28 @@ const App: React.FC = () => {
               <IonList>
                 <IonItem>
                   <IonLabel>
-                    <h2>Connor Smith</h2>
-                    <p>Sales Rep</p>
+                    <h2>10+10</h2>
+                    <p>20</p>
+                  </IonLabel>
+                </IonItem>
+              </IonList>
+            </IonContent>
+          </IonModal>
+          <IonModal id='memory' ref={modal} trigger="open-memory" initialBreakpoint={0.75} presentingElement={presentingElement!}>
+            <IonHeader >
+              <IonToolbar color="#1f1f1">
+                <IonTitle >Memoria</IonTitle>
+                <IonButtons slot="end">
+                  <IonButton onClick={() => dismiss()}>Cerrar</IonButton>
+                </IonButtons>
+              </IonToolbar>
+            </IonHeader>
+            <IonContent color="#1f1f1">
+              <IonList>
+                <IonItem>
+                  <IonLabel>
+                    <h2>10+10</h2>
+                    <p>20</p>
                   </IonLabel>
                 </IonItem>
               </IonList>
@@ -143,7 +169,9 @@ const App: React.FC = () => {
                 <BotonMem manejarClic={agregarInput}>M+</BotonMem>
                 <BotonMem manejarClic={agregarInput}>M-</BotonMem>
                 <BotonMem manejarClic={agregarInput}>MS</BotonMem>
-                <BotonMem manejarClic={agregarInput}>M</BotonMem>
+                <IonButton id="open-memory" expand="block">
+                  M
+                </IonButton>
               </div>
               <div className='fila'>
                 <Boton manejarClic={porcentaje}>%</Boton>
@@ -153,9 +181,9 @@ const App: React.FC = () => {
                 <Boton manejarClic={agregarInput}>⌫</Boton>
               </div>
               <div className='fila'>
-                <Boton manejarClic={agregarInput}>1/x</Boton>
-                <Boton manejarClic={cuadrado}>x^2</Boton>
-                <Boton manejarClic={agregarInput}>2sqrt(x)</Boton>
+                <Boton manejarClic={agregarInput}>1/𝒙</Boton>
+                <Boton manejarClic={cuadrado}>𝒙²</Boton>
+                <Boton manejarClic={agregarInput}>²√𝒙</Boton>
                 <Boton manejarClic={agregarInput}>÷</Boton>
               </div>
               <div className='fila'>
