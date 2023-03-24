@@ -28,7 +28,7 @@ import { BotonClear } from './components/BotonClear';
 setupIonicReact();
 
 const App: React.FC = () => {
-  const [input, setInput] = useState('0');
+  const [input, setInput] = useState('');
   const [historial, setHistorial] = useState<string[]>([]);
 
   const addToHistorial = (valor: string) => {
@@ -48,7 +48,7 @@ const App: React.FC = () => {
       setInput('');
       setInput(evaluate(input + "*" + input));
     } else if (val === "CE") {
-      setInput('0');
+      setInput('');
 
     } else if (val === "²√𝒙") {
 
@@ -143,6 +143,10 @@ const App: React.FC = () => {
                   }
                   return null;
                 })}
+                <IonItem>
+                  <IonLabel>
+                  </IonLabel>
+                </IonItem>
               </IonList>
             </IonContent>
           </IonModal>
