@@ -29,7 +29,11 @@ setupIonicReact();
 
 const App: React.FC = () => {
   const [input, setInput] = useState('0');
-  const [history, setHistory] = useState<string[]>([]);
+  const [historial, setHistorial] = useState<string[]>([]);
+
+  const addToHistorial = () => {
+    setHistorial(prevHistorial => [...prevHistorial, input]);
+  }
 
   const agregarInput = (val: string) => {
     setInput('');
