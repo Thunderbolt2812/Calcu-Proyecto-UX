@@ -29,6 +29,11 @@ setupIonicReact();
 
 const App: React.FC = () => {
   const [input, setInput] = useState('0');
+  const [historial, setHistorial] = useState<string[]>([]);
+
+  const addToHistorial = () => {
+    setHistorial(prevHistorial => [...prevHistorial, input]);
+  }
 
   const agregarInput = (val: string) => {
     setInput('');
@@ -59,6 +64,7 @@ const App: React.FC = () => {
     }
   }
   const calcularResultado = (valor: string) => {
+    //addToHistorial();
     if (input) {
       valor = input;
       console.log(valor);
@@ -74,6 +80,7 @@ const App: React.FC = () => {
         setInput(valor);
       }
       setInput(evaluate(valor));
+      addToHistorial();
     }
   }
   const porcentaje = () => {
@@ -88,6 +95,7 @@ const App: React.FC = () => {
   }
   const modal = useRef<HTMLIonModalElement>(null);
   const page = useRef(null);
+  const modal1 = useRef<HTMLIonModalElement>(null);
 
   const [presentingElement, setPresentingElement] = useState<HTMLElement | null>(null);
 
@@ -98,33 +106,38 @@ const App: React.FC = () => {
   function dismiss() {
     modal.current?.dismiss();
   }
+  function dismiss1() {
+    modal1.current?.dismiss();
+  }
 
 
   return (
     <IonApp>
       <IonPage>
         <IonContent fullscreen >
-          <IonModal id='historial' ref={modal} trigger="open-modal" initialBreakpoint={0.75} presentingElement={presentingElement!}>
+          <IonModal ref={modal1} trigger="open-modal" initialBreakpoint={0.75} presentingElement={presentingElement!}>
             <IonHeader >
               <IonToolbar color="#1f1f1">
                 <IonTitle >Historial</IonTitle>
                 <IonButtons slot="end">
-                  <IonButton onClick={() => dismiss()}>Cerrar</IonButton>
+                  <IonButton onClick={() => dismiss1()}>Cerrar</IonButton>
                 </IonButtons>
               </IonToolbar>
             </IonHeader>
             <IonContent color="#1f1f1">
               <IonList>
-                <IonItem>
-                  <IonLabel>
-                    <h2>10+10</h2>
-                    <p>20</p>
-                  </IonLabel>
-                </IonItem>
+                {historial.map((item, index) => (
+                  <IonItem key={index}>
+                    <IonLabel>
+                      <h2>{item}</h2>
+                      <p>{item}</p>
+                    </IonLabel>
+                  </IonItem>
+                ))}
               </IonList>
             </IonContent>
           </IonModal>
-          <IonModal id='memory' ref={modal} trigger="open-memory" initialBreakpoint={0.75} presentingElement={presentingElement!}>
+          <IonModal ref={modal} trigger="open-memory" initialBreakpoint={0.75} presentingElement={presentingElement!}>
             <IonHeader >
               <IonToolbar color="#1f1f1">
                 <IonTitle >Memoria</IonTitle>
@@ -137,8 +150,7 @@ const App: React.FC = () => {
               <IonList>
                 <IonItem>
                   <IonLabel>
-                    <h2>10+10</h2>
-                    <p>20</p>
+                    <h2>{input}</h2>
                   </IonLabel>
                 </IonItem>
               </IonList>
@@ -148,7 +160,6 @@ const App: React.FC = () => {
             <div className="calculadora">
               <div className='fila'>
                 <BotonMem manejarClic={agregarInput}>Historial</BotonMem>
-
                 <IonButton id="open-modal" expand="block">
                   <IonIcon name="time" ></IonIcon>
                 </IonButton>
