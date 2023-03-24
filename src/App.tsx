@@ -31,8 +31,8 @@ const App: React.FC = () => {
   const [input, setInput] = useState('0');
   const [historial, setHistorial] = useState<string[]>([]);
 
-  const addToHistorial = () => {
-    setHistorial(prevHistorial => [...prevHistorial, input]);
+  const addToHistorial = (valor: string) => {
+    setHistorial(prevHistorial => [...prevHistorial, valor]);
   }
 
   const agregarInput = (val: string) => {
@@ -49,13 +49,12 @@ const App: React.FC = () => {
       setInput(evaluate(input + "*" + input));
     } else if (val === "CE") {
       setInput('0');
-      
-    }  else if (val === "²√𝒙") {
+
+    } else if (val === "²√𝒙") {
 
       if (input.includes("-")) {
         val = input.replace("-", "+");
         setInput(evaluate("sqrt(" + val + ")"));
-
         console.log("hay signo -");
       } if (!input.includes("-")) {
         setInput(evaluate("sqrt(" + input + ")"));
@@ -67,7 +66,6 @@ const App: React.FC = () => {
     }
   }
   const calcularResultado = (valor: string) => {
-    //addToHistorial();
     if (input) {
       valor = input;
       console.log(valor);
@@ -83,7 +81,8 @@ const App: React.FC = () => {
         setInput(valor);
       }
       setInput(evaluate(valor));
-      addToHistorial();
+      addToHistorial(input);
+      addToHistorial(evaluate(valor));
     }
   }
   const porcentaje = () => {
@@ -130,14 +129,20 @@ const App: React.FC = () => {
             </IonHeader>
             <IonContent color="#1f1f1">
               <IonList>
-                {historial.map((item, index) => (
-                  <IonItem key={index}>
-                    <IonLabel>
-                      <h2>{item}</h2>
-                      <p>{item}</p>
-                    </IonLabel>
-                  </IonItem>
-                ))}
+                {historial.map((item, index) => {
+                  if (index % 2 === 0) {
+                    const nextItem = historial[index + 1];
+                    return (
+                      <IonItem key={index}>
+                        <IonLabel>
+                          <p>{`${item} = `}</p>
+                          <h2>{nextItem}</h2>
+                        </IonLabel>
+                      </IonItem>
+                    );
+                  }
+                  return null;
+                })}
               </IonList>
             </IonContent>
           </IonModal>
