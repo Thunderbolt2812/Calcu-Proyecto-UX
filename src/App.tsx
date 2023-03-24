@@ -1,4 +1,3 @@
-
 import { IonApp, setupIonicReact, IonContent, IonPage, IonHeader, IonToolbar, IonButtons, IonTitle, IonButton, IonModal, IonLabel, IonItem, IonList, IonIcon } from '@ionic/react';
 import './App.css';
 import Pantalla from './components/Pantalla';
@@ -30,11 +29,6 @@ setupIonicReact();
 
 const App: React.FC = () => {
   const [input, setInput] = useState('0');
-  const [history, setHistory] = useState([]);
-  type HistorialProps = {
-    history: any;
-    setHistory: any;
-}
 
   const agregarInput = (val: string) => {
     setInput('');
@@ -63,7 +57,6 @@ const App: React.FC = () => {
     } else {
       setInput(input + val);
     }
-
   }
   const calcularResultado = (valor: string) => {
     if (input) {
@@ -71,11 +64,9 @@ const App: React.FC = () => {
       console.log(valor);
       console.log("Soy input: " + input);
       if (input.includes("X")) {
-
         valor = valor.replace("X", "*")
         console.log("Debería cambiar: " + valor);
         setInput(valor);
-
       }
       if (input.includes("÷")) {
         valor = valor.replace("÷", "/")
@@ -157,7 +148,7 @@ const App: React.FC = () => {
             <div className="calculadora">
               <div className='fila'>
                 <BotonMem manejarClic={agregarInput}>Historial</BotonMem>
-                
+
                 <IonButton id="open-modal" expand="block">
                   <IonIcon name="time" ></IonIcon>
                 </IonButton>
