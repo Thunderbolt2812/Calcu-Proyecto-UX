@@ -1,7 +1,7 @@
 import { IonApp, setupIonicReact, IonContent, IonPage, IonHeader, IonToolbar, IonButtons, IonTitle, IonButton, IonModal, IonLabel, IonItem, IonList, IonIcon, IonMenu, IonMenuToggle } from '@ionic/react';
 import './App.css';
 import Pantalla from './components/Pantalla';
-import { Boton, BotonIgual, BotonMem, BotonE } from './components/Boton';
+import { Boton, BotonIgual} from './components/Boton';
 import React, { useState, useRef, useEffect } from 'react';
 import { evaluate } from 'mathjs';
 
