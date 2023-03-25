@@ -1,0 +1,32 @@
+{
+  "files": {
+    "main.css": "/Calcu-Proyecto-UX/static/css/main.5530e067.css",
+    "main.js": "/Calcu-Proyecto-UX/static/js/main.9366c126.js",
+    "static/js/738.d07bbb25.chunk.js": "/Calcu-Proyecto-UX/static/js/738.d07bbb25.chunk.js",
+    "static/js/372.5d0a2b70.chunk.js": "/Calcu-Proyecto-UX/static/js/372.5d0a2b70.chunk.js",
+    "static/js/856.675153b5.chunk.js": "/Calcu-Proyecto-UX/static/js/856.675153b5.chunk.js",
+    "static/js/22.717c8e0a.chunk.js": "/Calcu-Proyecto-UX/static/js/22.717c8e0a.chunk.js",
+    "static/js/272.c71c104f.chunk.js": "/Calcu-Proyecto-UX/static/js/272.c71c104f.chunk.js",
+    "static/js/841.d8123ca5.chunk.js": "/Calcu-Proyecto-UX/static/js/841.d8123ca5.chunk.js",
+    "static/js/186.d7ee4487.chunk.js": "/Calcu-Proyecto-UX/static/js/186.d7ee4487.chunk.js",
+    "static/js/225.544e1495.chunk.js": "/Calcu-Proyecto-UX/static/js/225.544e1495.chunk.js",
+    "static/js/377.abfd8660.chunk.js": "/Calcu-Proyecto-UX/static/js/377.abfd8660.chunk.js",
+    "service-worker.js": "/Calcu-Proyecto-UX/service-worker.js",
+    "index.html": "/Calcu-Proyecto-UX/index.html",
+    "main.5530e067.css.map": "/Calcu-Proyecto-UX/static/css/main.5530e067.css.map",
+    "main.9366c126.js.map": "/Calcu-Proyecto-UX/static/js/main.9366c126.js.map",
+    "738.d07bbb25.chunk.js.map": "/Calcu-Proyecto-UX/static/js/738.d07bbb25.chunk.js.map",
+    "372.5d0a2b70.chunk.js.map": "/Calcu-Proyecto-UX/static/js/372.5d0a2b70.chunk.js.map",
+    "856.675153b5.chunk.js.map": "/Calcu-Proyecto-UX/static/js/856.675153b5.chunk.js.map",
+    "22.717c8e0a.chunk.js.map": "/Calcu-Proyecto-UX/static/js/22.717c8e0a.chunk.js.map",
+    "272.c71c104f.chunk.js.map": "/Calcu-Proyecto-UX/static/js/272.c71c104f.chunk.js.map",
+    "841.d8123ca5.chunk.js.map": "/Calcu-Proyecto-UX/static/js/841.d8123ca5.chunk.js.map",
+    "186.d7ee4487.chunk.js.map": "/Calcu-Proyecto-UX/static/js/186.d7ee4487.chunk.js.map",
+    "225.544e1495.chunk.js.map": "/Calcu-Proyecto-UX/static/js/225.544e1495.chunk.js.map",
+    "377.abfd8660.chunk.js.map": "/Calcu-Proyecto-UX/static/js/377.abfd8660.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.5530e067.css",
+    "static/js/main.9366c126.js"
+  ]
+}
