@@ -1,7 +1,8 @@
-import { IonApp, setupIonicReact, IonContent, IonPage, IonHeader, IonToolbar, IonButtons, IonTitle, IonButton, IonModal, IonLabel, IonItem, IonList, IonIcon } from '@ionic/react';
+import { IonApp, setupIonicReact, IonContent, IonPage, IonHeader, IonToolbar, IonButtons, IonTitle, IonButton, IonModal, IonLabel, IonItem, IonList, IonIcon, IonMenu, IonMenuToggle } from '@ionic/react';
 import './App.css';
+import { menuOutline, homeOutline, settingsOutline } from 'ionicons/icons';
 import Pantalla from './components/Pantalla';
-import { Boton, BotonIgual, BotonMem } from './components/Boton';
+import { Boton, BotonIgual, BotonMem, BotonE } from './components/Boton';
 import React, { useState, useRef, useEffect } from 'react';
 import { evaluate } from 'mathjs';
 
@@ -30,6 +31,7 @@ setupIonicReact();
 const App: React.FC = () => {
   const [input, setInput] = useState('');
   const [historial, setHistorial] = useState<string[]>([]);
+  const [menuType, setMenuType] = useState('overlay');
 
   const addToHistorial = (valor: string) => {
     setHistorial(prevHistorial => [...prevHistorial, valor]);
@@ -116,8 +118,17 @@ const App: React.FC = () => {
 
   return (
     <IonApp>
-      <IonPage>
+      <IonPage id="main-content">
         <IonContent fullscreen >
+          <IonMenu type={menuType} contentId="main-content">
+            <IonHeader>
+              <IonToolbar>
+                <IonTitle>Acerca De</IonTitle>
+              </IonToolbar>
+            </IonHeader>
+            <IonContent className="ion-padding">
+            </IonContent>
+          </IonMenu>
           <IonModal ref={modal1} trigger="open-modal" initialBreakpoint={0.75} presentingElement={presentingElement!}>
             <IonHeader >
               <IonToolbar color="#1f1f1">
@@ -172,10 +183,15 @@ const App: React.FC = () => {
           <div className="App">
             <div className="calculadora">
               <div className='fila'>
-                <BotonMem manejarClic={agregarInput}>Historial</BotonMem>
-                <IonButton id="open-modal" expand="block">
-                  <IonIcon name="time" ></IonIcon>
-                </IonButton>
+                <IonMenuToggle>
+                  <IonButton><IonIcon src="/components/menu-outline.svg"></IonIcon></IonButton>
+                </IonMenuToggle>
+                <IonButtons slot="end">
+                  <IonButton id="open-modal" expand="block">
+                    historial
+                  </IonButton>
+                </IonButtons>
+
               </div>
               <Pantalla input={input} />
               <div className='fila'>

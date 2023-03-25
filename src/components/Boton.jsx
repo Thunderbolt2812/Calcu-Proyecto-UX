@@ -39,3 +39,15 @@ export function BotonMem(props) {
         </div>
     )
 }
+export function BotonE(props) {
+    function esOperador() {
+        const valor = props.children;
+        return (valor === '=');
+    }
+    return (
+        <div className={`botonMem ${esOperador() ? 'botonMem': ''}`}
+            onClick={() => props.manejarClic(props.children)}>
+            {props.children}
+        </div>
+    )
+}
