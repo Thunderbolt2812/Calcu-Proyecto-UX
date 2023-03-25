@@ -1,6 +1,5 @@
 import { IonApp, setupIonicReact, IonContent, IonPage, IonHeader, IonToolbar, IonButtons, IonTitle, IonButton, IonModal, IonLabel, IonItem, IonList, IonIcon, IonMenu, IonMenuToggle } from '@ionic/react';
 import './App.css';
-import { menuOutline, homeOutline, settingsOutline } from 'ionicons/icons';
 import Pantalla from './components/Pantalla';
 import { Boton, BotonIgual, BotonMem, BotonE } from './components/Boton';
 import React, { useState, useRef, useEffect } from 'react';
@@ -32,6 +31,49 @@ const App: React.FC = () => {
   const [input, setInput] = useState('');
   const [historial, setHistorial] = useState<string[]>([]);
   const [menuType, setMenuType] = useState('overlay');
+  const [numeros, setNumeros] = useState<number[]>([]);
+
+  const addNumeroToArray = () => {
+    const regex = /-?\d+(\.\d+)?/;
+    const match = regex.exec(input);
+    if (match) {
+      const numero = parseFloat(match[0]);
+      setNumeros([...numeros, numero]);
+    } else if (input.trim() === '') {
+      setNumeros([...numeros, 0]);
+    }
+  };
+
+  const mplus = () => {
+    const regex = /-?\d+(\.\d+)?/;
+    const match = regex.exec(input);
+    if (match) {
+      const numero = parseFloat(match[0]);
+      numeros[numeros.length - 1] += numero; 
+      setNumeros([...numeros]);
+    }
+  }
+
+  const menos = () => {
+    const regex = /-?\d+(\.\d+)?/;
+    const match = regex.exec(input);
+    if (match) {
+      const numero = parseFloat(match[0]);
+      numeros[numeros.length - 1] -= numero; 
+      setNumeros([...numeros]);
+    }
+  }
+
+  const recall = () => {
+    if (numeros.length === 0) {
+      setInput('0');
+    }
+    setInput(numeros[numeros.length - 1].toString());
+  };
+
+  const clearMemory = () => {
+    setNumeros([]);
+  }
 
   const addToHistorial = (valor: string) => {
     setHistorial(prevHistorial => [...prevHistorial, valor]);
@@ -51,22 +93,20 @@ const App: React.FC = () => {
       setInput(evaluate(input + "*" + input));
     } else if (val === "CE") {
       setInput('');
-
     } else if (val === "²√𝒙") {
-
       if (input.includes("-")) {
         val = input.replace("-", "+");
         setInput(evaluate("sqrt(" + val + ")"));
         console.log("hay signo -");
-      } if (!input.includes("-")) {
+      } else if (!input.includes("-")) {
         setInput(evaluate("sqrt(" + input + ")"));
         console.log("No hay signo -");
       }
-
     } else {
       setInput(input + val);
     }
-  }
+  };
+
   const calcularResultado = (valor: string) => {
     if (input) {
       valor = input;
@@ -98,9 +138,9 @@ const App: React.FC = () => {
     setInput(`${result}`);
   }
 
-  const modal = useRef<HTMLIonModalElement>(null);
+  const memoria = useRef<HTMLIonModalElement>(null);
   const page = useRef(null);
-  const modal1 = useRef<HTMLIonModalElement>(null);
+  const historialM = useRef<HTMLIonModalElement>(null);
 
   const [presentingElement, setPresentingElement] = useState<HTMLElement | null>(null);
 
@@ -109,10 +149,10 @@ const App: React.FC = () => {
   }, []);
 
   function dismiss() {
-    modal.current?.dismiss();
+    memoria.current?.dismiss();
   }
   function dismiss1() {
-    modal1.current?.dismiss();
+    historialM.current?.dismiss();
   }
 
 
@@ -129,7 +169,7 @@ const App: React.FC = () => {
             <IonContent className="ion-padding">
             </IonContent>
           </IonMenu>
-          <IonModal ref={modal1} trigger="open-modal" initialBreakpoint={0.75} presentingElement={presentingElement!}>
+          <IonModal ref={historialM} trigger="open-modal" initialBreakpoint={0.75} presentingElement={presentingElement!}>
             <IonHeader >
               <IonToolbar color="#1f1f1">
                 <IonTitle >Historial</IonTitle>
@@ -161,7 +201,7 @@ const App: React.FC = () => {
               </IonList>
             </IonContent>
           </IonModal>
-          <IonModal ref={modal} trigger="open-memory" initialBreakpoint={0.75} presentingElement={presentingElement!}>
+          <IonModal ref={memoria} trigger="open-memory" initialBreakpoint={0.75} presentingElement={presentingElement!}>
             <IonHeader >
               <IonToolbar color="#1f1f1">
                 <IonTitle >Memoria</IonTitle>
@@ -172,9 +212,15 @@ const App: React.FC = () => {
             </IonHeader>
             <IonContent color="#1f1f1">
               <IonList>
+                {numeros.map((numero, index) => (
+                  <IonItem key={index}>
+                    <IonLabel>
+                      <h2>{numero}</h2>
+                    </IonLabel>
+                  </IonItem>
+                ))}
                 <IonItem>
                   <IonLabel>
-                    <h2>{input}</h2>
                   </IonLabel>
                 </IonItem>
               </IonList>
@@ -195,19 +241,19 @@ const App: React.FC = () => {
               </div>
               <Pantalla input={input} />
               <div className='fila'>
-                <BotonMem manejarClic={agregarInput}>MC</BotonMem>
-                <BotonMem manejarClic={agregarInput}>MR</BotonMem>
-                <BotonMem manejarClic={agregarInput}>M+</BotonMem>
-                <BotonMem manejarClic={agregarInput}>M-</BotonMem>
-                <BotonMem manejarClic={agregarInput}>MS</BotonMem>
-                <IonButton id="open-memory" expand="block">
+                <IonButton fill="clear" onClick={clearMemory}>MC</IonButton>
+                <IonButton fill="clear" onClick={recall}>MR</IonButton>
+                <IonButton fill="clear" onClick={mplus}>M+</IonButton>
+                <IonButton fill="clear" onClick={menos}>M-</IonButton>
+                <IonButton fill="clear" onClick={addNumeroToArray}>MS</IonButton>
+                <IonButton id="open-memory" fill="clear" expand="block">
                   M
                 </IonButton>
               </div>
               <div className='fila'>
                 <Boton manejarClic={porcentaje}>%</Boton>
                 <Boton manejarClic={agregarInput}>CE</Boton>
-                <BotonClear manejarClear={() => setInput('0')}>
+                <BotonClear manejarClear={() => setInput('')}>
                   C</BotonClear>
                 <Boton manejarClic={agregarInput}>⌫</Boton>
               </div>
