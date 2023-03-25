@@ -1,7 +1,7 @@
 import { IonApp, setupIonicReact, IonContent, IonPage, IonHeader, IonToolbar, IonButtons, IonTitle, IonButton, IonModal, IonLabel, IonItem, IonList, IonIcon, IonMenu, IonMenuToggle } from '@ionic/react';
 import './App.css';
 import Pantalla from './components/Pantalla';
-import { Boton, BotonIgual} from './components/Boton';
+import { Boton, BotonIgual } from './components/Boton';
 import React, { useState, useRef, useEffect } from 'react';
 import { evaluate } from 'mathjs';
 
@@ -49,7 +49,7 @@ const App: React.FC = () => {
     const match = regex.exec(input);
     if (match) {
       const numero = parseFloat(match[0]);
-      numeros[numeros.length - 1] += numero; 
+      numeros[numeros.length - 1] += numero;
       setNumeros([...numeros]);
     }
   }
@@ -59,7 +59,7 @@ const App: React.FC = () => {
     const match = regex.exec(input);
     if (match) {
       const numero = parseFloat(match[0]);
-      numeros[numeros.length - 1] -= numero; 
+      numeros[numeros.length - 1] -= numero;
       setNumeros([...numeros]);
     }
   }
@@ -185,7 +185,7 @@ const App: React.FC = () => {
                     const nextItem = historial[index + 1];
                     return (
                       <IonItem key={index}>
-                        <IonLabel>
+                        <IonLabel slot="end">
                           <p>{`${item} = `}</p>
                           <h2>{nextItem}</h2>
                         </IonLabel>
@@ -195,8 +195,6 @@ const App: React.FC = () => {
                   return null;
                 })}
                 <IonItem>
-                  <IonLabel>
-                  </IonLabel>
                 </IonItem>
               </IonList>
             </IonContent>
@@ -212,9 +210,9 @@ const App: React.FC = () => {
             </IonHeader>
             <IonContent color="#1f1f1">
               <IonList>
-                {numeros.map((numero, index) => (
-                  <IonItem key={index}>
-                    <IonLabel>
+                {numeros.slice().reverse().map((numero, index) => (
+                  <IonItem key={numeros.length - index}>
+                    <IonLabel slot="end">
                       <h2>{numero}</h2>
                     </IonLabel>
                   </IonItem>
