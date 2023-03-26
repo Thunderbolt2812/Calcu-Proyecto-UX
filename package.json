@@ -76,6 +76,7 @@
     },
     "devDependencies": {
         "@capacitor/cli": "4.7.0",
+        "@types/babel__core": "^7.20.0",
         "gh-pages": "^5.0.0"
     },
     "description": "An Ionic project"

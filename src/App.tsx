@@ -108,35 +108,37 @@ const App: React.FC = () => {
   };
 
   const calcularResultado = (valor: string) => {
-    if (input) {
-      valor = input;
-      console.log(valor);
-      console.log("Soy input: " + input);
-      if (input.includes("X")) {
-        valor = valor.replace("X", "*")
-        console.log("Debería cambiar: " + valor);
-        setInput(valor);
+    const validInput = /^[^\+\-\*/\^%]/.test(valor);
+    if (typeof valor === 'string' && validInput) {
+      valor = valor.replace(/X/g, '*').replace(/÷/g, '/');
+      let resultado: string | number;
+      if (valor.includes('%')) {
+        const numero = evaluate(valor.replace('%', ''));
+        resultado = (numero / 100);
+        addToHistorial(valor);
+        addToHistorial(resultado.toString());
+      } else if (valor.includes('^2')) {
+        const numero = evaluate(valor.replace('^2', ''));
+        resultado = (numero ** 2);
+        addToHistorial(valor);
+        addToHistorial(resultado.toString());
+      } else {
+        resultado = evaluate(valor);
       }
-      if (input.includes("÷")) {
-        valor = valor.replace("÷", "/")
-        console.log("Debería cambiar: " + valor);
-        setInput(valor);
+      if (typeof resultado === 'number' && resultado % 1 !== 0) {
+        resultado = resultado.toFixed(5);
       }
-      setInput(evaluate(valor));
-      addToHistorial(input);
-      addToHistorial(evaluate(valor));
+      setInput(resultado.toString());
+      addToHistorial(valor);
+      addToHistorial(resultado.toString());
     }
   }
-  const porcentaje = () => {
-    const numero = evaluate(input);
-    const calculo = numero / 100;
-    setInput(`${calculo}`);
-  }
-  const cuadrado = () => {
-    const numero = evaluate(input);
-    const result = numero ** 2;
-    setInput(`${result}`);
-  }
+
+
+
+
+
+
 
   const memoria = useRef<HTMLIonModalElement>(null);
   const page = useRef(null);
@@ -249,7 +251,7 @@ const App: React.FC = () => {
                 </IonButton>
               </div>
               <div className='fila'>
-                <Boton manejarClic={porcentaje}>%</Boton>
+                <Boton manejarClic={agregarInput}>%</Boton>
                 <Boton manejarClic={agregarInput}>CE</Boton>
                 <BotonClear manejarClear={() => setInput('')}>
                   C</BotonClear>
@@ -257,7 +259,7 @@ const App: React.FC = () => {
               </div>
               <div className='fila'>
                 <Boton manejarClic={agregarInput}>1/𝒙</Boton>
-                <Boton manejarClic={cuadrado}>𝒙²</Boton>
+                <Boton manejarClic={agregarInput}>𝒙²</Boton>
                 <Boton manejarClic={agregarInput}>²√𝒙</Boton>
                 <Boton manejarClic={agregarInput}>÷</Boton>
               </div>
