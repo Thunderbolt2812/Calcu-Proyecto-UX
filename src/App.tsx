@@ -91,54 +91,55 @@ const App: React.FC = () => {
     } else if (val === "C") {
       setInput('');
       setInput(evaluate(input + "*" + input));
+    }
+    else if (val === "𝒙²") {
+      setInput(evaluate(input + "**2"));
     } else if (val === "CE") {
       setInput('');
     } else if (val === "²√𝒙") {
       if (input.includes("-")) {
         val = input.replace("-", "+");
         setInput(evaluate("sqrt(" + val + ")"));
-        console.log("hay signo -");
       } else if (!input.includes("-")) {
         setInput(evaluate("sqrt(" + input + ")"));
-        console.log("No hay signo -");
       }
     } else {
       setInput(input + val);
     }
   };
 
-  const calcularResultado = (valor: string) => {
-    const validInput = /^[^\+\-\*/\^%]/.test(valor);
-    if (typeof valor === 'string' && validInput) {
-      valor = valor.replace(/X/g, '*').replace(/÷/g, '/');
-      let resultado: string | number;
-      if (valor.includes('%')) {
-        const numero = evaluate(valor.replace('%', ''));
-        resultado = (numero / 100);
-        addToHistorial(valor);
-        addToHistorial(resultado.toString());
-      } else if (valor.includes('^2')) {
-        const numero = evaluate(valor.replace('^2', ''));
-        resultado = (numero ** 2);
-        addToHistorial(valor);
-        addToHistorial(resultado.toString());
-      } else {
-        resultado = evaluate(valor);
-      }
+  const calcularResultado = () => {
+    if (input) {
+      let valor = input.replace(/X/g, '*').replace(/%/g, '/');
+      setInput(valor);
+      const resultado = evaluate(valor);
       if (typeof resultado === 'number' && resultado % 1 !== 0) {
-        resultado = resultado.toFixed(5);
+        setInput(resultado.toFixed(5).toString());
+      } else {
+        setInput(resultado.toString());
       }
-      setInput(resultado.toString());
       addToHistorial(valor);
       addToHistorial(resultado.toString());
     }
   }
 
+  const porcentaje = () => {
+    const numero_aux = evaluate(input);
+    const calc_percentage = numero_aux / 100;
+    const string_aux = calc_percentage.toString();
+    setInput(`${calc_percentage}`);
+    addToHistorial(input);
+    addToHistorial(string_aux);
+  }
 
-
-
-
-
+  const cuadrado = () => {
+    const numero_aux = evaluate(input);
+    const calc_result = numero_aux ** 2;
+    const string_aux = calc_result.toString();
+    setInput(`${calc_result} `);
+    addToHistorial(input);
+    addToHistorial(string_aux);
+  }
 
   const memoria = useRef<HTMLIonModalElement>(null);
   const page = useRef(null);
@@ -157,6 +158,12 @@ const App: React.FC = () => {
     historialM.current?.dismiss();
   }
 
+  const [currentDate, setCurrentDate] = useState('');
+
+  useEffect(() => {
+    const date = new Date();
+    setCurrentDate(date.toDateString());
+  }, []);
 
   return (
     <IonApp>
@@ -168,7 +175,18 @@ const App: React.FC = () => {
                 <IonTitle>Acerca De</IonTitle>
               </IonToolbar>
             </IonHeader>
-            <IonContent className="ion-padding">
+            <IonContent>
+              <IonLabel className='titulo'>Autores</IonLabel>
+              <IonLabel>Gustavo Pineda 11911302</IonLabel>
+              <IonLabel>Walter Reyes 12011140</IonLabel>
+              <IonLabel>Ronal Zuniga 12011247</IonLabel>
+              <br></br>
+              <IonLabel className='titulo'>Clase</IonLabel>
+              <IonLabel>Experiencia de Usuario  892</IonLabel>
+              <br></br>
+              <IonLabel className='titulo'>Fecha</IonLabel>
+              <IonLabel>{currentDate}</IonLabel>
+              <br></br>
             </IonContent>
           </IonMenu>
           <IonModal ref={historialM} trigger="open-modal" initialBreakpoint={0.75} presentingElement={presentingElement!}>
@@ -228,16 +246,12 @@ const App: React.FC = () => {
           </IonModal>
           <div className="App">
             <div className="calculadora">
-              <div className='fila'>
+              <div className='fila-sup'>
                 <IonMenuToggle>
-                  <IonButton><IonIcon src="/components/menu-outline.svg"></IonIcon></IonButton>
-                </IonMenuToggle>
-                <IonButtons slot="end">
-                  <IonButton id="open-modal" expand="block">
-                    historial
-                  </IonButton>
-                </IonButtons>
+                  <IonButton>🖩</IonButton>
 
+                </IonMenuToggle>
+                <IonButton id="open-modal">Historial</IonButton>
               </div>
               <Pantalla input={input} />
               <div className='fila'>
@@ -251,7 +265,7 @@ const App: React.FC = () => {
                 </IonButton>
               </div>
               <div className='fila'>
-                <Boton manejarClic={agregarInput}>%</Boton>
+                <Boton manejarClic={porcentaje}>%</Boton>
                 <Boton manejarClic={agregarInput}>CE</Boton>
                 <BotonClear manejarClear={() => setInput('')}>
                   C</BotonClear>
@@ -259,7 +273,7 @@ const App: React.FC = () => {
               </div>
               <div className='fila'>
                 <Boton manejarClic={agregarInput}>1/𝒙</Boton>
-                <Boton manejarClic={agregarInput}>𝒙²</Boton>
+                <Boton manejarClic={cuadrado}>𝒙²</Boton>
                 <Boton manejarClic={agregarInput}>²√𝒙</Boton>
                 <Boton manejarClic={agregarInput}>÷</Boton>
               </div>
@@ -296,4 +310,8 @@ const App: React.FC = () => {
   )
 };
 export default App;
+
+function useIonMenuController(): { close: any; } {
+  throw new Error('Function not implemented.');
+}
 
