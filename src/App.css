@@ -108,3 +108,18 @@ ion-label {
   font-weight: bold;
   font-style: italic;
 }
+
+.buttons-container {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  height: 60px;
+  background-color: #1F1F1F;
+  color: #fff;
+  border: 0.01px solid #1F1F1F;
+}
+
+.buttons-container ion-button {
+  width: 60px;
+  margin-right: 5px;
+}

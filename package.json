@@ -4,6 +4,7 @@
     "version": "0.0.1",
     "private": true,
     "react": "^15.3.1",
+    "type": "module",
     "dependencies": {
         "@capacitor/android": "4.7.0",
         "@capacitor/app": "4.1.1",
@@ -11,7 +12,7 @@
         "@capacitor/haptics": "4.1.0",
         "@capacitor/keyboard": "4.1.1",
         "@capacitor/status-bar": "4.1.1",
-        "@ionic/react": "^6.0.0",
+        "@ionic/react": "^6.7.0",
         "@ionic/react-router": "^6.0.0",
         "@testing-library/jest-dom": "^5.11.9",
         "@testing-library/react": "^13.3.0",
@@ -50,8 +51,11 @@
         "deploy": "gh-pages -d build",
         "start": "react-scripts start",
         "build": "react-scripts build",
-        "test": "react-scripts test --transformIgnorePatterns 'node_modules/(?!(@ionic/react|@ionic/react-router|@ionic/core|@stencil/core|ionicons)/)'",
+        "test": "react-scripts test",
         "eject": "react-scripts eject"
+    },
+    "transform": {
+        "^.+\\.jsx?$": "babel-jest"
     },
     "eslintConfig": {
         "extends": [
@@ -75,9 +79,42 @@
         ]
     },
     "devDependencies": {
+        "@babel/core": "^7.21.3",
+        "@babel/preset-env": "^7.20.2",
+        "@babel/preset-typescript": "^7.21.0",
         "@capacitor/cli": "4.7.0",
         "@types/babel__core": "^7.20.0",
-        "gh-pages": "^5.0.0"
+        "babel-jest": "^29.5.0",
+        "gh-pages": "^5.0.0",
+        "jest": "^27.5.1"
     },
-    "description": "An Ionic project"
+    "description": "An Ionic project",
+    "plugins": [
+        "syntax-dynamic-import",
+        "transform-runtime"
+    ],
+    "presets": [
+        [
+            "es2015",
+            {
+                "modules": false
+            }
+        ],
+        "react",
+        "stage-0"
+    ],
+    "env": {
+        "start": {
+            "presets": [
+                "react-hmre"
+            ]
+        },
+        "test": {
+            "presets": [
+                "es2015",
+                "react",
+                "stage-0"
+            ]
+        }
+    }
 }

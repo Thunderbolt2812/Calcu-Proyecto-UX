@@ -1,9 +1,11 @@
-import { IonApp, setupIonicReact, IonContent, IonPage, IonHeader, IonToolbar, IonButtons, IonTitle, IonButton, IonModal, IonLabel, IonItem, IonList, IonIcon, IonMenu, IonMenuToggle } from '@ionic/react';
+import { IonApp, setupIonicReact, IonContent, IonPage, IonHeader, IonToolbar, IonButtons, IonTitle, IonButton, IonModal, IonLabel, IonItem, IonList, IonMenu, IonMenuToggle } from '@ionic/react';
 import './App.css';
 import Pantalla from './components/Pantalla';
 import { Boton, BotonIgual } from './components/Boton';
 import React, { useState, useRef, useEffect } from 'react';
 import { evaluate } from 'mathjs';
+import { IonIcon } from '@ionic/react';
+import { menu, time } from 'ionicons/icons';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -32,6 +34,7 @@ const App: React.FC = () => {
   const [historial, setHistorial] = useState<string[]>([]);
   const [menuType, setMenuType] = useState('overlay');
   const [numeros, setNumeros] = useState<number[]>([]);
+  const [buttonsEnabled, setButtonsEnabled] = useState(false);
 
   const addNumeroToArray = () => {
     const regex = /-?\d+(\.\d+)?/;
@@ -42,6 +45,7 @@ const App: React.FC = () => {
     } else if (input.trim() === '') {
       setNumeros([...numeros, 0]);
     }
+    setButtonsEnabled(true);
   };
 
   const mplus = () => {
@@ -84,24 +88,52 @@ const App: React.FC = () => {
     if (val === "⌫") {
       setInput(input.slice(0, -1));
     } else if (val === "1/𝒙") {
-      setInput(evaluate("1/" + input));
+      if (input == '') {
+        setInput("MathError")
+      } else {
+        setInput(evaluate("1/" + input).toFixed(6));
+        addToHistorial("1/" + input);
+        addToHistorial(evaluate("1/" + input).toFixed(6));
+      }
     } else if (val === "+/-") {
       setInput(evaluate(input + "*(-1)"));
-      console.log("Estoy en el cambio de signo: " + input);
     } else if (val === "C") {
       setInput('');
-      setInput(evaluate(input + "*" + input));
-    }
-    else if (val === "𝒙²") {
-      setInput(evaluate(input + "**2"));
     } else if (val === "CE") {
       setInput('');
     } else if (val === "²√𝒙") {
-      if (input.includes("-")) {
-        val = input.replace("-", "+");
-        setInput(evaluate("sqrt(" + val + ")"));
-      } else if (!input.includes("-")) {
-        setInput(evaluate("sqrt(" + input + ")"));
+      if (input == '') {
+        setInput("MathError")
+      } else {
+        if (input.includes("-")) {
+          val = input.replace("-", "+");
+          let aux = evaluate("sqrt(" + input + ")").toFixed(3);
+          addToHistorial("²√" + input);
+          addToHistorial(aux);
+        } else if (!input.includes("-")) {
+          let aux = evaluate("sqrt(" + input + ")").toFixed(3).toString();
+          addToHistorial("²√" + input);
+          setInput(aux);
+          addToHistorial(aux);
+        }
+      }
+    } else if (val === "%") {
+      if (input == '') {
+        setInput("MathError")
+      } else {
+        setInput(evaluate(input + "/100").toFixed(6));
+        addToHistorial(input + "/100");
+        addToHistorial(evaluate(input + "/100").toFixed(6));
+      }
+    } else if (val === "𝒙²") {
+      if (isNaN(parseInt(input))) {
+        setInput("MathError");
+      } else {
+        const result = Math.pow(parseFloat(input), 2);
+        const resultString = Number.isInteger(result) ? result.toString() : result.toFixed(3);
+        setInput(resultString);
+        addToHistorial(input + "^2");
+        addToHistorial(resultString);
       }
     } else {
       setInput(input + val);
@@ -110,35 +142,21 @@ const App: React.FC = () => {
 
   const calcularResultado = () => {
     if (input) {
-      let valor = input.replace(/X/g, '*').replace(/%/g, '/');
+      let valor = input.replace(/X/g, '*').replace(/÷/g, '/');
       setInput(valor);
-      const resultado = evaluate(valor);
-      if (typeof resultado === 'number' && resultado % 1 !== 0) {
-        setInput(resultado.toFixed(5).toString());
-      } else {
-        setInput(resultado.toString());
+      try {
+        const resultado = evaluate(valor);
+        if (typeof resultado === 'number' && resultado % 1 !== 0) {
+          setInput(resultado.toFixed(3).toString());
+        } else {
+          setInput(resultado.toString());
+        }
+        addToHistorial(valor);
+        addToHistorial(resultado.toString());
+      } catch (error) {
+        setInput('MathError');
       }
-      addToHistorial(valor);
-      addToHistorial(resultado.toString());
     }
-  }
-
-  const porcentaje = () => {
-    const numero_aux = evaluate(input);
-    const calc_percentage = numero_aux / 100;
-    const string_aux = calc_percentage.toString();
-    setInput(`${calc_percentage}`);
-    addToHistorial(input);
-    addToHistorial(string_aux);
-  }
-
-  const cuadrado = () => {
-    const numero_aux = evaluate(input);
-    const calc_result = numero_aux ** 2;
-    const string_aux = calc_result.toString();
-    setInput(`${calc_result} `);
-    addToHistorial(input);
-    addToHistorial(string_aux);
   }
 
   const memoria = useRef<HTMLIonModalElement>(null);
@@ -246,26 +264,29 @@ const App: React.FC = () => {
           </IonModal>
           <div className="App">
             <div className="calculadora">
-              <div className='fila-sup'>
+              <div className="buttons-container">
                 <IonMenuToggle>
-                  <IonButton>🖩</IonButton>
-
+                  <IonButton size="small">
+                    <IonIcon icon={menu} />
+                  </IonButton>
                 </IonMenuToggle>
-                <IonButton id="open-modal">Historial</IonButton>
+                <IonButton size="small" id="open-modal">
+                  <IonIcon icon={time} />
+                </IonButton>
               </div>
               <Pantalla input={input} />
               <div className='fila'>
-                <IonButton fill="clear" onClick={clearMemory}>MC</IonButton>
-                <IonButton fill="clear" onClick={recall}>MR</IonButton>
+                <IonButton fill="clear" onClick={clearMemory} disabled={!buttonsEnabled}>MC</IonButton>
+                <IonButton fill="clear" onClick={recall} disabled={!buttonsEnabled}>MR</IonButton>
                 <IonButton fill="clear" onClick={mplus}>M+</IonButton>
                 <IonButton fill="clear" onClick={menos}>M-</IonButton>
                 <IonButton fill="clear" onClick={addNumeroToArray}>MS</IonButton>
-                <IonButton id="open-memory" fill="clear" expand="block">
+                <IonButton id="open-memory" fill="clear" expand="block" disabled={!buttonsEnabled}>
                   M
                 </IonButton>
               </div>
               <div className='fila'>
-                <Boton manejarClic={porcentaje}>%</Boton>
+                <Boton manejarClic={agregarInput}>%</Boton>
                 <Boton manejarClic={agregarInput}>CE</Boton>
                 <BotonClear manejarClear={() => setInput('')}>
                   C</BotonClear>
@@ -273,7 +294,7 @@ const App: React.FC = () => {
               </div>
               <div className='fila'>
                 <Boton manejarClic={agregarInput}>1/𝒙</Boton>
-                <Boton manejarClic={cuadrado}>𝒙²</Boton>
+                <Boton manejarClic={agregarInput}>𝒙²</Boton>
                 <Boton manejarClic={agregarInput}>²√𝒙</Boton>
                 <Boton manejarClic={agregarInput}>÷</Boton>
               </div>
