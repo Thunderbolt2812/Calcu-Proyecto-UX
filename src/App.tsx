@@ -32,7 +32,7 @@ setupIonicReact();
 const App: React.FC = () => {
   const [input, setInput] = useState('');
   const [historial, setHistorial] = useState<string[]>([]);
-  const [menuType, setMenuType] = useState('overlay');
+  const [menuType] = useState('overlay');
   const [numeros, setNumeros] = useState<number[]>([]);
   const [buttonsEnabled, setButtonsEnabled] = useState(false);
 
@@ -77,6 +77,7 @@ const App: React.FC = () => {
 
   const clearMemory = () => {
     setNumeros([]);
+    setButtonsEnabled(false);
   }
 
   const addToHistorial = (valor: string) => {
@@ -88,7 +89,7 @@ const App: React.FC = () => {
     if (val === "⌫") {
       setInput(input.slice(0, -1));
     } else if (val === "1/𝒙") {
-      if (input == '') {
+      if (input === '') {
         setInput("MathError")
       } else {
         setInput(evaluate("1/" + input).toFixed(6));
@@ -102,7 +103,7 @@ const App: React.FC = () => {
     } else if (val === "CE") {
       setInput('');
     } else if (val === "²√𝒙") {
-      if (input == '') {
+      if (input === '') {
         setInput("MathError")
       } else {
         if (input.includes("-")) {
@@ -118,7 +119,7 @@ const App: React.FC = () => {
         }
       }
     } else if (val === "%") {
-      if (input == '') {
+      if (input === '') {
         setInput("MathError")
       } else {
         setInput(evaluate(input + "/100").toFixed(6));
@@ -270,7 +271,7 @@ const App: React.FC = () => {
                     <IonIcon icon={menu} />
                   </IonButton>
                 </IonMenuToggle>
-                <IonButton size="small" id="open-modal">
+                <IonButton size="small" id="open-modal" slot="end">
                   <IonIcon icon={time} />
                 </IonButton>
               </div>
@@ -331,8 +332,4 @@ const App: React.FC = () => {
   )
 };
 export default App;
-
-function useIonMenuController(): { close: any; } {
-  throw new Error('Function not implemented.');
-}
 
