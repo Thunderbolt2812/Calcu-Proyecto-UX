@@ -1,32 +1,32 @@
 {
   "files": {
-    "main.css": "/Calcu-Proyecto-UX/static/css/main.704211e2.css",
-    "main.js": "/Calcu-Proyecto-UX/static/js/main.a5af67b8.js",
+    "main.css": "/Calcu-Proyecto-UX/static/css/main.6b39c67f.css",
+    "main.js": "/Calcu-Proyecto-UX/static/js/main.f4b4aa3a.js",
     "static/js/738.d07bbb25.chunk.js": "/Calcu-Proyecto-UX/static/js/738.d07bbb25.chunk.js",
-    "static/js/372.5d0a2b70.chunk.js": "/Calcu-Proyecto-UX/static/js/372.5d0a2b70.chunk.js",
-    "static/js/856.675153b5.chunk.js": "/Calcu-Proyecto-UX/static/js/856.675153b5.chunk.js",
+    "static/js/372.c52158c1.chunk.js": "/Calcu-Proyecto-UX/static/js/372.c52158c1.chunk.js",
+    "static/js/856.6f3e0b2c.chunk.js": "/Calcu-Proyecto-UX/static/js/856.6f3e0b2c.chunk.js",
     "static/js/22.717c8e0a.chunk.js": "/Calcu-Proyecto-UX/static/js/22.717c8e0a.chunk.js",
-    "static/js/272.c71c104f.chunk.js": "/Calcu-Proyecto-UX/static/js/272.c71c104f.chunk.js",
-    "static/js/841.d8123ca5.chunk.js": "/Calcu-Proyecto-UX/static/js/841.d8123ca5.chunk.js",
-    "static/js/186.d7ee4487.chunk.js": "/Calcu-Proyecto-UX/static/js/186.d7ee4487.chunk.js",
+    "static/js/344.06824497.chunk.js": "/Calcu-Proyecto-UX/static/js/344.06824497.chunk.js",
+    "static/js/841.0aa1d03a.chunk.js": "/Calcu-Proyecto-UX/static/js/841.0aa1d03a.chunk.js",
+    "static/js/186.ca75bb2f.chunk.js": "/Calcu-Proyecto-UX/static/js/186.ca75bb2f.chunk.js",
     "static/js/225.544e1495.chunk.js": "/Calcu-Proyecto-UX/static/js/225.544e1495.chunk.js",
     "static/js/377.abfd8660.chunk.js": "/Calcu-Proyecto-UX/static/js/377.abfd8660.chunk.js",
     "service-worker.js": "/Calcu-Proyecto-UX/service-worker.js",
     "index.html": "/Calcu-Proyecto-UX/index.html",
-    "main.704211e2.css.map": "/Calcu-Proyecto-UX/static/css/main.704211e2.css.map",
-    "main.a5af67b8.js.map": "/Calcu-Proyecto-UX/static/js/main.a5af67b8.js.map",
+    "main.6b39c67f.css.map": "/Calcu-Proyecto-UX/static/css/main.6b39c67f.css.map",
+    "main.f4b4aa3a.js.map": "/Calcu-Proyecto-UX/static/js/main.f4b4aa3a.js.map",
     "738.d07bbb25.chunk.js.map": "/Calcu-Proyecto-UX/static/js/738.d07bbb25.chunk.js.map",
-    "372.5d0a2b70.chunk.js.map": "/Calcu-Proyecto-UX/static/js/372.5d0a2b70.chunk.js.map",
-    "856.675153b5.chunk.js.map": "/Calcu-Proyecto-UX/static/js/856.675153b5.chunk.js.map",
+    "372.c52158c1.chunk.js.map": "/Calcu-Proyecto-UX/static/js/372.c52158c1.chunk.js.map",
+    "856.6f3e0b2c.chunk.js.map": "/Calcu-Proyecto-UX/static/js/856.6f3e0b2c.chunk.js.map",
     "22.717c8e0a.chunk.js.map": "/Calcu-Proyecto-UX/static/js/22.717c8e0a.chunk.js.map",
-    "272.c71c104f.chunk.js.map": "/Calcu-Proyecto-UX/static/js/272.c71c104f.chunk.js.map",
-    "841.d8123ca5.chunk.js.map": "/Calcu-Proyecto-UX/static/js/841.d8123ca5.chunk.js.map",
-    "186.d7ee4487.chunk.js.map": "/Calcu-Proyecto-UX/static/js/186.d7ee4487.chunk.js.map",
+    "344.06824497.chunk.js.map": "/Calcu-Proyecto-UX/static/js/344.06824497.chunk.js.map",
+    "841.0aa1d03a.chunk.js.map": "/Calcu-Proyecto-UX/static/js/841.0aa1d03a.chunk.js.map",
+    "186.ca75bb2f.chunk.js.map": "/Calcu-Proyecto-UX/static/js/186.ca75bb2f.chunk.js.map",
     "225.544e1495.chunk.js.map": "/Calcu-Proyecto-UX/static/js/225.544e1495.chunk.js.map",
     "377.abfd8660.chunk.js.map": "/Calcu-Proyecto-UX/static/js/377.abfd8660.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.704211e2.css",
-    "static/js/main.a5af67b8.js"
+    "static/css/main.6b39c67f.css",
+    "static/js/main.f4b4aa3a.js"
   ]
 }
