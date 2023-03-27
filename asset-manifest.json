@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/Calcu-Proyecto-UX/static/css/main.5530e067.css",
-    "main.js": "/Calcu-Proyecto-UX/static/js/main.9366c126.js",
+    "main.css": "/Calcu-Proyecto-UX/static/css/main.704211e2.css",
+    "main.js": "/Calcu-Proyecto-UX/static/js/main.a5af67b8.js",
     "static/js/738.d07bbb25.chunk.js": "/Calcu-Proyecto-UX/static/js/738.d07bbb25.chunk.js",
     "static/js/372.5d0a2b70.chunk.js": "/Calcu-Proyecto-UX/static/js/372.5d0a2b70.chunk.js",
     "static/js/856.675153b5.chunk.js": "/Calcu-Proyecto-UX/static/js/856.675153b5.chunk.js",
@@ -13,8 +13,8 @@
     "static/js/377.abfd8660.chunk.js": "/Calcu-Proyecto-UX/static/js/377.abfd8660.chunk.js",
     "service-worker.js": "/Calcu-Proyecto-UX/service-worker.js",
     "index.html": "/Calcu-Proyecto-UX/index.html",
-    "main.5530e067.css.map": "/Calcu-Proyecto-UX/static/css/main.5530e067.css.map",
-    "main.9366c126.js.map": "/Calcu-Proyecto-UX/static/js/main.9366c126.js.map",
+    "main.704211e2.css.map": "/Calcu-Proyecto-UX/static/css/main.704211e2.css.map",
+    "main.a5af67b8.js.map": "/Calcu-Proyecto-UX/static/js/main.a5af67b8.js.map",
     "738.d07bbb25.chunk.js.map": "/Calcu-Proyecto-UX/static/js/738.d07bbb25.chunk.js.map",
     "372.5d0a2b70.chunk.js.map": "/Calcu-Proyecto-UX/static/js/372.5d0a2b70.chunk.js.map",
     "856.675153b5.chunk.js.map": "/Calcu-Proyecto-UX/static/js/856.675153b5.chunk.js.map",
@@ -26,7 +26,7 @@
     "377.abfd8660.chunk.js.map": "/Calcu-Proyecto-UX/static/js/377.abfd8660.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.5530e067.css",
-    "static/js/main.9366c126.js"
+    "static/css/main.704211e2.css",
+    "static/js/main.a5af67b8.js"
   ]
 }
